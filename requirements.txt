@@ -1,0 +1,7 @@
+tf-nightly
+mne
+numpy
+pandas
+matplotlib
+scikit-learn
+seaborn
