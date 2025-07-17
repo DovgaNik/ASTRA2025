@@ -12,7 +12,16 @@ def send_text(servo_code, angle):
 # Pins of servos must be set up in the arduino code, while in python code the letter corresponding to each servo must be specified.
 #A - is the servo that control rotation of the whole arm (movement left-right)
 LR_SIGNAL='A'
-#B
+def left():
+    send_text(LR_SIGNAL, 180)
+
+def center():
+    send_text(LR_SIGNAL, 90)
+
+def right():
+    send_text(LR_SIGNAL, 0)
+
+#B - is the servo controls movements forward and backward
 #C - is the server that control the up-down movements of the arm
 UPDOWN_SIGNAL='C'
 def up():
@@ -33,15 +42,5 @@ def clamp_close():
 
 
 print(ser.name)
-
-while True:
-    up()
-    time.sleep(0.5)
-    clamp_open()
-    time.sleep(2)
-    down()
-    time.sleep(0.5)
-    clamp_close()
-    time.sleep(2)
 
 ser.close()
