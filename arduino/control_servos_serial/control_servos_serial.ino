@@ -28,7 +28,7 @@ void loop() {
       inputString += inChar;
     } else if ((inChar == '\n' || inChar == '\r') && inputString.length() > 0 && servoId != 0) {
       int angle = inputString.toInt();
-      angle = constrain(angle, 0, 180);
+      angle = constrain(angle, 1, 160);
 
       switch (servoId) {
         case 'A':
