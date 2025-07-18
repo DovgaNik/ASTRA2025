@@ -3,7 +3,6 @@ import serial
 
 class RobotController:
     # Constants for servo signals
-    LR_SIGNAL = 'A'  # servo that controls rotation of the whole arm (movement left-right)
     FB_SIGNAL = 'B'  # servo that controls movements forward and backward
     UPDOWN_SIGNAL = 'C'  # servo that controls the up-down movements of the arm
     CLAMP_SIGNAL = 'D'  # clamp servo
@@ -27,18 +26,6 @@ class RobotController:
             angle (int): Angle to set the servo to (0-180)
         """
         self.ser.write((servo_code + str(angle) + '\n').encode())
-
-    def left(self):
-        """Move the arm to the left position (180 degrees)."""
-        self.send_text(self.LR_SIGNAL, 180)
-
-    def right(self):
-        """Move the arm to the right position (0 degrees)."""
-        self.send_text(self.LR_SIGNAL, 0)
-
-    def center(self):
-        """Center the arm (90 degrees)."""
-        self.send_text(self.LR_SIGNAL, 90)
 
     def up(self):
         """Move the arm up."""
@@ -72,14 +59,13 @@ class RobotController:
 # Example usage
 if __name__ == "__main__":
     # Create a robot controller with default port
-    robot = RobotController()
+    robot = RobotController("/dev/ttyACM0")
 
     # Example movements
-    robot.left()
+    robot.forward()
     time.sleep(1)
-    robot.right()
+    robot.backward()
     time.sleep(1)
-    robot.center()
 
     # Close connection
     robot.close()

@@ -1,18 +1,16 @@
 #include <Servo.h>
-// 3 5 9 6
-Servo servo1; // A
-Servo servo2; // B
-Servo servo3; // C
-Servo servo4;
+// 5 9 6
+Servo servo1; // B
+Servo servo2; // C
+Servo servo3; // D
 
 String inputString = "";
 char servoId = 0;
 
 void setup() {
-  servo1.attach(3);
-  servo2.attach(5);
-  servo3.attach(9); 
-  servo4.attach(6);
+  servo1.attach(5);
+  servo2.attach(9);
+  servo3.attach(6);
 
   Serial.begin(9600);
 }
@@ -21,7 +19,7 @@ void loop() {
   while (Serial.available()) {
     char inChar = (char)Serial.read();
 
-    if (servoId == 0 && (inChar == 'A' || inChar == 'B' || inChar == 'C' || inChar == 'D')) {
+    if (servoId == 0 && (inChar == 'B' || inChar == 'C' || inChar == 'D')) {
       servoId = inChar;
       inputString = "";
     } else if (isDigit(inChar)) {
@@ -31,17 +29,14 @@ void loop() {
       angle = constrain(angle, 1, 160);
 
       switch (servoId) {
-        case 'A':
+        case 'B':
           servo1.write(angle);
           break;
-        case 'B':
+        case 'C':
           servo2.write(angle);
           break;
-        case 'C':
-          servo3.write(angle);
-          break;
         case 'D':
-          servo4.write(angle);
+          servo3.write(angle);
           break;
       }
 
